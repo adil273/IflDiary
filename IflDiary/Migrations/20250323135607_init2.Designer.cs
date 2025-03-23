@@ -4,6 +4,7 @@ using IflDiary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IflDiary.Migrations
 {
     [DbContext(typeof(IflDiaryContext))]
-    partial class IflDiaryContextModelSnapshot : ModelSnapshot
+    [Migration("20250323135607_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,28 +33,28 @@ namespace IflDiary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Category")
+                    b.Property<string>("DemandCategory")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreateBy")
+                    b.Property<string>("DemandCreateBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime>("DemandCreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DemandNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("PurchaseBy")
+                    b.Property<string>("DemandPurchaseBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReceivedOn")
+                    b.Property<DateTime>("DemandReceivedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RequiredFor")
+                    b.Property<string>("DemandRequiredFor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -119,10 +122,6 @@ namespace IflDiary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

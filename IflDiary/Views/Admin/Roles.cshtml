@@ -1,0 +1,32 @@
+﻿@using IflDiary.Models;
+@model List<Role>;
+<div class="card">
+	<div class="card-header">
+		<h4>App Roles [ <a href="/Admin/AddUpdateRole">Add New Role</a> ] </h4>
+	</div>
+	<div class="card-body">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (Role role in Model)
+				{
+
+					<tr>
+						<td>@role.Id</td>
+						<td>@role.Name</td>
+						<td>
+							<a href="/Admin/AddUpdateRole/@role.Id">Edit |</a>
+							<a href="/Admin/DeleteRole/@role.Id">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
