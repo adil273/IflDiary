@@ -1,0 +1,46 @@
+﻿@using IflDiary.Models;
+@model Demand;
+<div class="row"></div>
+<div class="col-md-4 offset-4">
+	<div class="card">
+		<div class="card-header">
+			<h4>Add Demand Details</h4>
+		</div>
+		<div class="card-body">
+			<form action="/Engineer/AddUpdateDemand" method="post">
+				<input type="hidden" asp-for="Id" />
+				<div class="mb-2">
+					<label class="form-label">Created Date</label>
+					<input class="form-control" type="date" asp-for="CreatedOn" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Demand Number</label>
+					<input class="form-control" type="text" asp-for="DemandNumber" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Category</label>
+					<input class="form-control" type="text" asp-for="Category" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Creator</label>
+					<input class="form-control" type="text" asp-for="CreateBy" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Purchaser</label>
+					<input class="form-control" type="text" asp-for="PurchaseBy" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Remarks</label>
+					<input class="form-control" type="text" asp-for="RequiredFor" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Received Date</label>
+					<input class="form-control" type="date" asp-for="ReceivedOn" />
+				</div>
+				<div class="mb-2 text-center">
+					<button class="btn btn-primary" type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

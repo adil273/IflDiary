@@ -15,7 +15,8 @@ namespace IflDiary.Controllers
         {
             return View();
         }
-
+        
+        ///////////ROLE CRUS STARTS HERE////////////////////
         public IActionResult Roles()
         {
             List<Role> role = _context.Roles.ToList();
@@ -50,5 +51,6 @@ namespace IflDiary.Controllers
             _context.SaveChanges();
             return Redirect("/Admin/Roles");
         }
+        ///////////ROLE CRUS ENDS HERE////////////////////
     }
 }
