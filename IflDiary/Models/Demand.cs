@@ -6,10 +6,11 @@
         public int DemandNumber { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ReceivedOn { get; set; }
-        public string CreateBy {  get; set; }
-        public string PurchaseBy { get; set; }
-        public string RequiredFor { get; set; }
+        public string Creater { get; set; }
+        public string Required { get; set; }
         public string Category { get; set; }
+        public int PurchaserId { get; set; }
+        public virtual Purchaser Purchaser { get; set; }
 
     }
 }

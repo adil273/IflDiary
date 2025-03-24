@@ -1,0 +1,30 @@
+﻿@using IflDiary.Models;
+@model List<Purchaser>;
+<div class="card">
+	<div class="card-header">
+		<h4>Purchase Team [<a href="/Admin/AddUpdatePurchaser">Add Purchase Member</a>]</h4>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover table-stripped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (Purchaser purchaser in Model)
+				{
+					<tr>
+						<td>@purchaser.Id</td>
+						<td>@purchaser.Name</td>
+						<td>
+							<a href="/Admin/AddUpdatePurchaser/@purchaser.Id">Edit |</a>
+							<a href="/Admin/DeletePurchaser/@purchaser.Id">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
