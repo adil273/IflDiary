@@ -9,7 +9,6 @@
 			<thead>
 				
 				<tr>
-					@* <th>Id</th> *@
 					<th>Date</th>
 					<th>Demand No.</th>
 					<th>Category</th>
@@ -24,13 +23,13 @@
 			{
 				<tbody>
 					<tr>
-					@* <td>@demand.Id</td> *@
+					
 						<td>@demand.CreatedOn.ToString("dd-MMM-yy")</td>
 						<td>@demand.DemandNumber</td>
 						<td>@demand.Category</td>
-						<td>@demand.CreateBy</td>
-						<td>@demand.PurchaseBy</td>
-						<td>@demand.RequiredFor</td>
+						<td>@demand.Creater</td>
+						<td>@demand.Purchaser.Name</td>
+						<td>@demand.Required</td>
 						<td>@demand.ReceivedOn.ToString("dd-MMM-yy")</td>
 						<td>
 							<a href="/Engineer/AddUpdateDemand/@demand.Id">Edit |</a>

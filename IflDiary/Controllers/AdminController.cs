@@ -52,5 +52,48 @@ namespace IflDiary.Controllers
             return Redirect("/Admin/Roles");
         }
         ///////////ROLE CRUS ENDS HERE////////////////////
+
+        //////////////PURCHASE CRUS STARTS HERE////////////////////
+        public IActionResult Purchasers()
+        {
+            List<Purchaser> purchaser = _context.Purchasers.ToList();
+            return View(purchaser);
+        }
+        [HttpGet]
+        public IActionResult AddUpdatePurchaser(int id=0)
+        {
+            if (id == 0)
+            {
+                return View();
+            }
+            else 
+            {
+                Purchaser purchaser = _context.Purchasers.Where(x => x.Id == id).FirstOrDefault();
+                return View(purchaser);
+
+            }
+        }
+        [HttpPost]
+        public IActionResult AddUpdatePurchaser(Purchaser purchaser)
+        {
+            _context.Purchasers.Update(purchaser);
+            _context.SaveChanges();
+            return Redirect("/Admin/Purchasers");
+        }
+        [HttpGet]
+        public IActionResult DeletePurchaser(int id)
+        {
+            Purchaser purchaser = _context.Purchasers.Where(x => x.Id == id).FirstOrDefault();
+            _context.Purchasers.Remove(purchaser);
+            _context.SaveChanges();
+            return Redirect("/Admin/Purchasers");
+        }
+
+
+        //////////////PURCHASE CRUS ENDS HERE////////////////////
+
+
+
+
     }
 }

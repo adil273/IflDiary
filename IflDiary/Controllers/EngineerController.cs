@@ -1,5 +1,10 @@
-﻿using IflDiary.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using IflDiary.Models;
 
 namespace IflDiary.Controllers
 {
@@ -18,12 +23,20 @@ namespace IflDiary.Controllers
         ///DEMAND CRUD STARS HERE//////////////////////////////////////
         public IActionResult Demands()
         {
-            List<Demand> demand = _context.Demands.ToList();
+            List<Demand> demand = _context.Demands.Include(x => x.Purchaser).ToList();
             return View(demand);
         }
         [HttpGet]
-        public IActionResult AddUpdateDemand(int id=0)
+        public IActionResult AddUpdateDemand(int id = 0)
         {
+        //    ViewBag.Purchasers = _context.Purchasers
+        // .Select(x => new SelectListItem
+        // {
+        //     Value = x.Id.ToString(),
+        //     Text = x.Name
+        // })
+        // .ToList();
+            ViewBag.Purchasers = _context.Purchasers.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = $"{x.Name}" }).ToList();
             if (id == 0)
             {
                 return View();

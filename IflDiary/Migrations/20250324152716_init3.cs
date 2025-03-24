@@ -13,7 +13,7 @@ namespace IflDiary.Migrations
             migrationBuilder.RenameColumn(
                 name: "DemandRequiredFor",
                 table: "Demands",
-                newName: "RequiredFor");
+                newName: "Required");
 
             migrationBuilder.RenameColumn(
                 name: "DemandReceivedOn",
@@ -33,7 +33,7 @@ namespace IflDiary.Migrations
             migrationBuilder.RenameColumn(
                 name: "DemandCreateBy",
                 table: "Demands",
-                newName: "CreateBy");
+                newName: "Creater");
 
             migrationBuilder.RenameColumn(
                 name: "DemandCategory",
@@ -46,17 +46,65 @@ namespace IflDiary.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
+
+            migrationBuilder.AddColumn<int>(
+                name: "PurchaserId",
+                table: "Demands",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.CreateTable(
+                name: "Purchasers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purchasers", x => x.Id);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Demands_PurchaserId",
+                table: "Demands",
+                column: "PurchaserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Demands_Purchasers_PurchaserId",
+                table: "Demands",
+                column: "PurchaserId",
+                principalTable: "Purchasers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Demands_Purchasers_PurchaserId",
+                table: "Demands");
+
+            migrationBuilder.DropTable(
+                name: "Purchasers");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Demands_PurchaserId",
+                table: "Demands");
+
             migrationBuilder.DropColumn(
                 name: "Name",
                 table: "Roles");
 
+            migrationBuilder.DropColumn(
+                name: "PurchaserId",
+                table: "Demands");
+
             migrationBuilder.RenameColumn(
-                name: "RequiredFor",
+                name: "Required",
                 table: "Demands",
                 newName: "DemandRequiredFor");
 
@@ -71,14 +119,14 @@ namespace IflDiary.Migrations
                 newName: "DemandPurchaseBy");
 
             migrationBuilder.RenameColumn(
+                name: "Creater",
+                table: "Demands",
+                newName: "DemandCreateBy");
+
+            migrationBuilder.RenameColumn(
                 name: "CreatedOn",
                 table: "Demands",
                 newName: "DemandCreatedOn");
-
-            migrationBuilder.RenameColumn(
-                name: "CreateBy",
-                table: "Demands",
-                newName: "DemandCreateBy");
 
             migrationBuilder.RenameColumn(
                 name: "Category",

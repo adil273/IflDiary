@@ -34,28 +34,29 @@ namespace IflDiary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Creater")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DemandNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("PurchaseBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PurchaserId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReceivedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RequiredFor")
+                    b.Property<string>("Required")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PurchaserId");
 
                     b.ToTable("Demands");
                 });
@@ -110,6 +111,23 @@ namespace IflDiary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ogps");
+                });
+
+            modelBuilder.Entity("IflDiary.Models.Purchaser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Purchasers");
                 });
 
             modelBuilder.Entity("IflDiary.Models.Role", b =>
@@ -168,6 +186,17 @@ namespace IflDiary.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("IflDiary.Models.Demand", b =>
+                {
+                    b.HasOne("IflDiary.Models.Purchaser", "Purchaser")
+                        .WithMany()
+                        .HasForeignKey("PurchaserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Purchaser");
                 });
 
             modelBuilder.Entity("IflDiary.Models.User", b =>

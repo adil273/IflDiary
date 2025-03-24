@@ -7,8 +7,9 @@
 			<h4>Add Demand Details</h4>
 		</div>
 		<div class="card-body">
-			<form action="/Engineer/AddUpdateDemand" method="post">
+			<form action="/Engineer/AddUpdateDemand" method="post" enctype="multipart/form-data">
 				<input type="hidden" asp-for="Id" />
+
 				<div class="mb-2">
 					<label class="form-label">Created Date</label>
 					<input class="form-control" type="date" asp-for="CreatedOn" />
@@ -23,15 +24,17 @@
 				</div>
 				<div class="mb-2">
 					<label class="form-label">Creator</label>
-					<input class="form-control" type="text" asp-for="CreateBy" />
+					<input class="form-control" type="text" asp-for="Creater" />
 				</div>
-				<div class="mb-2">
-					<label class="form-label">Purchaser</label>
-					<input class="form-control" type="text" asp-for="PurchaseBy" />
-				</div>
+				<div class="mb-3"> 
+				<label class="form-label">Purchaser</label> 
+				<select class="form-select form-label" asp-for="PurchaserId" asp-items="ViewBag.Purchasers"> 
+						<option> --Select Purchaser-- </option> 
+				</select>
+				 </div>
 				<div class="mb-2">
 					<label class="form-label">Remarks</label>
-					<input class="form-control" type="text" asp-for="RequiredFor" />
+					<input class="form-control" type="text" asp-for="Required" />
 				</div>
 				<div class="mb-2">
 					<label class="form-label">Received Date</label>
