@@ -4,6 +4,7 @@ using IflDiary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IflDiary.Migrations
 {
     [DbContext(typeof(IflDiaryContext))]
-    partial class IflDiaryContextModelSnapshot : ModelSnapshot
+    [Migration("20250325131925_init5")]
+    partial class init5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,16 +33,21 @@ namespace IflDiary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Creater")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DemandCategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("DemandNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ElectricalDepartmentId")
                         .HasColumnType("int");
 
                     b.Property<int>("PurchaserId")
@@ -55,8 +63,6 @@ namespace IflDiary.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DemandCategoryId");
-
-                    b.HasIndex("ElectricalDepartmentId");
 
                     b.HasIndex("PurchaserId");
 
@@ -91,23 +97,6 @@ namespace IflDiary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Diaries");
-                });
-
-            modelBuilder.Entity("IflDiary.Models.ElectricalDepartment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ElectricalDepartments");
                 });
 
             modelBuilder.Entity("IflDiary.Models.Followup", b =>
@@ -232,12 +221,6 @@ namespace IflDiary.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("IflDiary.Models.ElectricalDepartment", "ElectricalDepartment")
-                        .WithMany()
-                        .HasForeignKey("ElectricalDepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("IflDiary.Models.Purchaser", "Purchaser")
                         .WithMany()
                         .HasForeignKey("PurchaserId")
@@ -245,8 +228,6 @@ namespace IflDiary.Migrations
                         .IsRequired();
 
                     b.Navigation("DemandCategory");
-
-                    b.Navigation("ElectricalDepartment");
 
                     b.Navigation("Purchaser");
                 });

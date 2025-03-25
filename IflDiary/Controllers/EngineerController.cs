@@ -23,7 +23,7 @@ namespace IflDiary.Controllers
         ///DEMAND CRUD STARS HERE//////////////////////////////////////
         public IActionResult Demands()
         {
-            List<Demand> demand = _context.Demands.Include(x => x.Purchaser).ToList();
+            List<Demand> demand = _context.Demands.Include(x => x.Purchaser).Include(x => x.ElectricalDepartment).Include(x => x.DemandCategory).ToList();
             return View(demand);
         }
         [HttpGet]
@@ -37,6 +37,8 @@ namespace IflDiary.Controllers
         // })
         // .ToList();
             ViewBag.Purchasers = _context.Purchasers.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = $"{x.Name}" }).ToList();
+            ViewBag.DemandCategories = _context.DemandCategories.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = $"{x.Name}" }).ToList();
+            ViewBag.ElectricalDepartments = _context.ElectricalDepartments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = $"{x.Name}" }).ToList();
             if (id == 0)
             {
                 return View();
