@@ -12,33 +12,38 @@
 
 				<div class="mb-2">
 					<label class="form-label">Created Date</label>
-					<input class="form-control" type="date" asp-for="CreatedOn" />
+					<input class="form-control" type="date" asp-for="CreatedOn"/>
 				</div>
 				<div class="mb-2">
 					<label class="form-label">Demand Number</label>
 					<input class="form-control" type="text" asp-for="DemandNumber" />
 				</div>
+				
 				<div class="mb-2">
 					<label class="form-label">Category</label>
-					<input class="form-control" type="text" asp-for="Category" />
+					<select class="form-select" asp-for="DemandCategoryId" asp-items="ViewBag.DemandCategories">
+						<option> --Select Category-- </option>
+					</select>
 				</div>
 				<div class="mb-2">
-					<label class="form-label">Creator</label>
-					<input class="form-control" type="text" asp-for="Creater" />
+					<label class="form-label">Initiate By</label>
+					<select class="form-select" asp-for="ElectricalDepartmentId" asp-items="ViewBag.ElectricalDepartments">
+						<option> --Choose Initiator-- </option>
+					</select>
 				</div>
-				<div class="mb-3"> 
-				<label class="form-label">Purchaser</label> 
-				<select class="form-select form-label" asp-for="PurchaserId" asp-items="ViewBag.Purchasers"> 
-						<option> --Select Purchaser-- </option> 
-				</select>
-				 </div>
+				<div class="mb-3">
+					<label class="form-label">Purchaser</label>
+					<select class="form-select" asp-for="PurchaserId" asp-items="ViewBag.Purchasers">
+						<option> --Select Purchaser-- </option>
+					</select>
+				</div>
 				<div class="mb-2">
 					<label class="form-label">Remarks</label>
 					<input class="form-control" type="text" asp-for="Required" />
 				</div>
 				<div class="mb-2">
 					<label class="form-label">Received Date</label>
-					<input class="form-control" type="date" asp-for="ReceivedOn" />
+					<input class="form-control" type="date" asp-for="ReceivedOn"/>
 				</div>
 				<div class="mb-2 text-center">
 					<button class="btn btn-primary" type="submit">Submit</button>

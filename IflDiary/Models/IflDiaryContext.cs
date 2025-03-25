@@ -27,6 +27,8 @@ namespace IflDiary.Models
         public DbSet<Ogp> Ogps { get; set; }
         public DbSet<Demand> Demands { get; set; }
         public DbSet<Purchaser> Purchasers { get; set; }
+        public DbSet<DemandCategory> DemandCategories { get; set; }
+        public DbSet<ElectricalDepartment> ElectricalDepartments { get; set; }
 
     }
 }

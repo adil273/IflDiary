@@ -88,9 +88,81 @@ namespace IflDiary.Controllers
             _context.SaveChanges();
             return Redirect("/Admin/Purchasers");
         }
+        //////////////DEMAND CATEGORY CRUD STARTS HERE////////////////////
+        public IActionResult DemandCategories()
+        {
+            List<DemandCategory> DemandCategory = _context.DemandCategories.ToList();
+            return View(DemandCategory);
+        }
+        [HttpGet]
+        public IActionResult AddUpdateDemandCategory(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View();
+            }
+            else
+            {
+                DemandCategory DemandCategory = _context.DemandCategories.Where(x => x.Id == id).FirstOrDefault();
+                return View(DemandCategory);
 
+            }
+        }
+        [HttpPost]
+        public IActionResult AddUpdateDemandCategory(DemandCategory DemandCategory)
+        {
+            _context.DemandCategories.Update(DemandCategory);
+            _context.SaveChanges();
+            return Redirect("/Admin/DemandCategories");
+        }
+        [HttpGet]
+        public IActionResult DeleteDemandCategory(int id)
+        {
+            DemandCategory DemandCategory = _context.DemandCategories.Where(x => x.Id == id).FirstOrDefault();
+            _context.DemandCategories.Remove(DemandCategory);
+            _context.SaveChanges();
+            return Redirect("/Admin/DemandCategories");
+        }
 
-        //////////////PURCHASE CRUS ENDS HERE////////////////////
+        //////////////DEMAND CATEGORY CRUD ENDS HERE////////////////////
+
+        //////////////DEMAND CATEGORY CRUD STARTS HERE////////////////////
+        //////////////ELECTRICAL DEPARTMENT CRUD STARTS HERE////////////////////
+        public IActionResult ElectricalDepartments()
+        {
+            List<ElectricalDepartment> ElectricalDepartment = _context.ElectricalDepartments.ToList();
+            return View(ElectricalDepartment);
+        }
+        [HttpGet]
+        public IActionResult AddUpdateElectricalDepartment(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View();
+            }
+            else
+            {
+                ElectricalDepartment ElectricalDepartment = _context.ElectricalDepartments.Where(x => x.Id == id).FirstOrDefault();
+                return View(ElectricalDepartment);
+
+            }
+        }
+        [HttpPost]
+        public IActionResult AddUpdateElectricalDepartment(ElectricalDepartment ElectricalDepartment)
+        {
+            _context.ElectricalDepartments.Update(ElectricalDepartment);
+            _context.SaveChanges();
+            return Redirect("/Admin/ElectricalDepartments");
+        }
+        [HttpGet]
+        public IActionResult DeleteElectricalDepartment(int id)
+        {
+            ElectricalDepartment ElectricalDepartment = _context.ElectricalDepartments.Where(x => x.Id == id).FirstOrDefault();
+            _context.ElectricalDepartments.Remove(ElectricalDepartment);
+            _context.SaveChanges();
+            return Redirect("/Admin/ElectricalDepartments");
+        }
+        //////////////ELECTRICAL DEPARTMENTCRUD ENDS HERE////////////////////
 
 
 
