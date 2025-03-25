@@ -1,0 +1,30 @@
+﻿@using IflDiary.Models;
+@model List<ElectricalDepartment>;
+<div class="card">
+	<div class="card-header">
+		<h4>Electrical Department [<a href="/Admin/AddUpdateElectricalDepartment">Add Member</a>]</h4>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover table-stripped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (ElectricalDepartment ElectricalDepartment in Model)
+				{
+					<tr>
+						<td>@ElectricalDepartment.Id</td>
+						<td>@ElectricalDepartment.Name</td>
+						<td>
+							<a href="/Admin/AddUpdateElectricalDepartment/@ElectricalDepartment.Id">Edit |</a>
+							<a href="/Admin/DeleteElectricalDepartment/@ElectricalDepartment.Id">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

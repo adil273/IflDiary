@@ -1,0 +1,30 @@
+﻿@using IflDiary.Models;
+@model List<DemandCategory>;
+<div class="card">
+	<div class="card-header">
+		<h4>Demand Category [<a href="/Admin/AddUpdateDemandCategory">Demand Category</a>]</h4>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover table-stripped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (DemandCategory DemandCategory in Model)
+				{
+					<tr>
+						<td>@DemandCategory.Id</td>
+						<td>@DemandCategory.Name</td>
+						<td>
+							<a href="/Admin/AddUpdateDemandCategory/@DemandCategory.Id">Edit |</a>
+							<a href="/Admin/DeleteDemandCategory/@DemandCategory.Id">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
