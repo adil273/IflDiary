@@ -13,7 +13,5 @@
         public virtual DemandCategory DemandCategory { get; set; }
         public int ElectricalDepartmentId { get; set; }
         public virtual ElectricalDepartment ElectricalDepartment { get; set; }
-
-
     }
 }
