@@ -127,6 +127,44 @@ namespace IflDiary.Controllers
         //////////////DEMAND CATEGORY CRUD ENDS HERE////////////////////
 
         //////////////DEMAND CATEGORY CRUD STARTS HERE////////////////////
+
+        ////////////// DEPARTMENT CRUD STARTS HERE////////////////////
+        public IActionResult Departments()
+        {
+            List<Department> Department = _context.Departments.ToList();
+            return View(Department);
+        }
+        [HttpGet]
+        public IActionResult AddUpdateDepartment(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View();
+            }
+            else
+            {
+                Department Department = _context.Departments.Where(x => x.Id == id).FirstOrDefault();
+                return View(Department);
+
+            }
+        }
+        [HttpPost]
+        public IActionResult AddUpdateDepartment(Department Department)
+        {
+            _context.Departments.Update(Department);
+            _context.SaveChanges();
+            return Redirect("/Admin/Departments");
+        }
+        [HttpGet]
+        public IActionResult DeleteDepartment(int id)
+        {
+            Department Department = _context.Departments.Where(x => x.Id == id).FirstOrDefault();
+            _context.Departments.Remove(Department);
+            _context.SaveChanges();
+            return Redirect("/Admin/Departments");
+        }
+        ////////////// DEPARTMENTCRUD ENDS HERE////////////////////
+
         //////////////ELECTRICAL DEPARTMENT CRUD STARTS HERE////////////////////
         public IActionResult ElectricalDepartments()
         {

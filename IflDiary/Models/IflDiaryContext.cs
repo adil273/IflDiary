@@ -28,7 +28,11 @@ namespace IflDiary.Models
         public DbSet<Demand> Demands { get; set; }
         public DbSet<Purchaser> Purchasers { get; set; }
         public DbSet<DemandCategory> DemandCategories { get; set; }
+        public DbSet<Department> Departments { get; set; }
         public DbSet<ElectricalDepartment> ElectricalDepartments { get; set; }
+        public DbSet<MechanicalDepartment> MechanicalDepartments { get; set; }
+        public DbSet<QualityDepartment> QualityDepartments { get; set; }
+        public DbSet<ProcessDepartment> ProcessDepartments { get; set; }
 
     }
 }
