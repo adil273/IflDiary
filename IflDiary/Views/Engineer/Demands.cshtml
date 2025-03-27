@@ -16,6 +16,7 @@
 					<th>Purcahser</th>
 					<th>Required</th>
 					<th>Received Date</th>
+					<th>Status</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -31,6 +32,8 @@
 						<td>@demand.Purchaser.Name</td>
 						<td>@demand.Required</td>
 						<td>@demand.ReceivedOn.ToString("dd-MMM-yy")</td>
+						<td>@demand.Status</td>
+
 						<td>
 							<a href="/Engineer/AddUpdateDemand/@demand.Id">Edit |</a>
 							<a href="/Engineer/DeleteDemand/@demand.Id">Delete</a>
