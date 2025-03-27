@@ -68,6 +68,12 @@ namespace IflDiary.Controllers
             List<Diary> diary = _context.Diaries.Include(x => x.Department).ToList();
             return View(diary);
         }
+        public IActionResult ActivityComplete()
+        {
+            List<Diary> diary = _context.Diaries.Where(x => x.Status == "Finish").Include(x => x.Department).ToList();
+
+            return View(diary);
+        }
         [HttpGet]
         public IActionResult AddUpdateDiary(int id = 0)
         {
@@ -89,6 +95,7 @@ namespace IflDiary.Controllers
         {
             diary.CreatedOn = DateTime.UtcNow.AddHours(5);
             diary.ActivityNumber = DateTime.UtcNow.AddHours(5).ToString("hhmm");
+            diary.Status = "Pending";
             _context.Diaries.Update(diary);
             _context.SaveChanges();
             return Redirect("/Engineer/Diaries");
@@ -98,7 +105,26 @@ namespace IflDiary.Controllers
         public IActionResult DeleteDiary(int id)
         {
             Diary diary = _context.Diaries.Where(x => x.Id == id).FirstOrDefault();
+            diary.Status = "Cancel";
             _context.Diaries.Remove(diary);
+            _context.SaveChanges();
+            return Redirect("/Engineer/Diaries");
+        }
+        [HttpGet]
+        public IActionResult DeleteCDiary(int id)
+        {
+            Diary diary = _context.Diaries.Where(x => x.Id == id).FirstOrDefault();
+            _context.Diaries.Remove(diary);
+            _context.SaveChanges();
+            return Redirect("/Engineer/ActivityComplete");
+        }
+        [HttpGet]
+        public IActionResult CompleteDiary(int id)
+        {
+            Diary diary = _context.Diaries.Where(x => x.Id == id).FirstOrDefault();
+            diary.Status = "Finish";
+            diary.CompleteOn = DateTime.UtcNow.AddHours(5);
+            _context.Diaries.Update(diary);
             _context.SaveChanges();
             return Redirect("/Engineer/Diaries");
         }
